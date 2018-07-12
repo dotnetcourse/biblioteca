@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Biblioteca</h1>
+    <p class="lead">Pagina bibliotecii mele.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Lista carti</h2>
+        <p>
+            Aici puteti vizualiza lista de carti din biblioteca mea.
+        </p>
+        <p>@Html.ActionLink("Vizualizeaza >", "List", "Books", null, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Carti noi</h2>
+        <p>Aici puteti adauga carti in biblioteca.</p>
+        <p>@Html.ActionLink( "Adauga >", "Add", "Books", null, new { @class = "btn btn-default" })</p>
+    </div>
+</div>
