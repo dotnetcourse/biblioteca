@@ -9,13 +9,12 @@ namespace Biblioteca1.Controllers
 {
     public class BooksController : Controller
     {
+        private static List<BookModel> bookList = new List<BookModel>();
+
         // GET: Books
         public ActionResult List()
         {
-            Repository rep = new Repository();
-            List<BookModel> books = rep.GetBooks();
-
-            return View(books);
+            return View(bookList);
         }
 
         [HttpGet]
@@ -27,18 +26,9 @@ namespace Biblioteca1.Controllers
         [HttpPost]
         public ActionResult Add(BookModel book)
         {
-            Repository rep = new Repository();
-            rep.AddBook(book);
+            bookList.Add(book);
 
             return View("AddSuccess");
-        }
-
-        public ActionResult Delete()
-        {
-            Repository rep = new Repository();
-            rep.DeleteBook(1);
-
-            return View();
         }
     }
 }
