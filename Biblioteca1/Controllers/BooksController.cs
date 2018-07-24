@@ -14,7 +14,10 @@ namespace Biblioteca1.Controllers
         // GET: Books
         public ActionResult List()
         {
-            return View(bookList);
+            BooksRepository r = new BooksRepository();
+            List<BookModel> myBooks = r.GetAll();
+
+            return View(myBooks);
         }
 
         [HttpGet]
@@ -26,7 +29,10 @@ namespace Biblioteca1.Controllers
         [HttpPost]
         public ActionResult Add(BookModel book)
         {
-            bookList.Add(book);
+            //bookList.Add(book);
+            BooksRepository r = new BooksRepository();
+
+            r.Add(book);
 
             return View("AddSuccess");
         }

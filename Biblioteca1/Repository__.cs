@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Biblioteca1
 {
-    public class Repository
+    public class Repository__
     {
         const string ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|Database1.mdf;Integrated Security=True";
 
