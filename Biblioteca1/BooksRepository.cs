@@ -23,13 +23,30 @@ namespace Biblioteca1
 
         public List<BookModel> GetAll()
         {
-            using (var db = new LiteDatabase(@"c:\db\Biblioteca.db"))
+            try
             {
-                // Get customer collection
-                var books = db.GetCollection<BookModel>("books");
+                using (var db = new LiteDatabase(@"c:\db\Biblioteca.db"))
+                {
+                    // Get customer collection
+                    var books = db.GetCollection<BookModel>("books");
 
-                return books.FindAll().ToList();
+                    return books.FindAll().ToList();
+                }
+            }catch(Exception ex)
+            {
+                //log exceptions
+
+                throw new ApplicationException("Eroare la conectarea la baza de date", ex);
             }
+        }
+
+        public void Delete(int id)
+        {
+            var db = new LiteDatabase(@"c:\db\Biblioteca.db");
+            var books = db.GetCollection<BookModel>("books");
+
+            books.Delete(id);
+
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Biblioteca1.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,15 +11,17 @@ namespace Biblioteca1.Controllers
 {
     public class BooksController : Controller
     {
-        private static List<BookModel> bookList = new List<BookModel>();
-
         // GET: Books
         public ActionResult List()
         {
-            BooksRepository r = new BooksRepository();
-            List<BookModel> myBooks = r.GetAll();
+           
+                BooksRepository r = new BooksRepository();
+                
+                List<BookModel> myBooks = r.GetAll();
+                
+                return View(myBooks);
+           
 
-            return View(myBooks);
         }
 
         [HttpGet]
@@ -40,36 +44,14 @@ namespace Biblioteca1.Controllers
         //books/delete/15
         public ActionResult Delete(int id)
         {
-            var b1 = bookList.First(x => x.Id == id);
-            bookList.Remove(b1);
+            BooksRepository r = new BooksRepository();
 
-            return View("List", bookList);
+            r.Delete(id);
+            List<BookModel> myBooks = r.GetAll();
 
-            //bool exitAll = false;
 
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    foreach (BookModel book in bookList)
-            //    {
-            //        if (book.Name == "mybook")
-            //        {
-            //            exitAll = true;
-            //            break;
-            //        }
 
-            //        if (book.Id == id)
-            //        {
-            //            bookList.RemoveAt(id);
-
-            //        }
-            //    }
-
-            //    if (exitAll)
-            //    {
-            //        break;
-            //    }
-            //}
-
+            return View("List", myBooks);
 
         }
 
