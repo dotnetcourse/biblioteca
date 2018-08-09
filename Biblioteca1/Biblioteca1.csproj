@@ -207,6 +207,8 @@
     <Content Include="Views\Books\Add.cshtml" />
     <Content Include="Views\Books\AddSuccess.cshtml" />
     <Content Include="Views\Books\Search.cshtml" />
+    <Content Include="Views\Books\Upload__.cshtml" />
+    <Content Include="Views\Books\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

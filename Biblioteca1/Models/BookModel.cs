@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace Biblioteca1.Models
 {
     public class BookModel
     {
+        [JsonIgnore]
         public int Id { get; set; }
 
         [Required()]
