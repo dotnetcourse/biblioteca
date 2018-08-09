@@ -14,14 +14,11 @@ namespace Biblioteca1.Controllers
         // GET: Books
         public ActionResult List()
         {
-           
-                BooksRepository r = new BooksRepository();
-                
-                List<BookModel> myBooks = r.GetAll();
-                
-                return View(myBooks);
-           
+            BooksRepository r = new BooksRepository();
 
+            List<BookModel> myBooks = r.GetAll();
+
+            return View(myBooks);
         }
 
         [HttpGet]
@@ -55,10 +52,19 @@ namespace Biblioteca1.Controllers
 
         }
 
-        //books/altaction?nume=whitefang&autor=jacklondon
-        //public ActionResult AltAction(string nume, string autor)
-        //{
+        public ActionResult Search()
+        {
+            return View();
+        }
 
-        //}
+        [HttpPost]
+        public ActionResult Search(SearchModel searchData)
+        {
+            BooksRepository r = new BooksRepository();
+
+            List<BookModel> foundBooks = r.Search(searchData.Text);
+
+            return View("List", foundBooks);
+        }
     }
 }

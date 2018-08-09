@@ -48,5 +48,18 @@ namespace Biblioteca1
             books.Delete(id);
 
         }
+
+        public List<BookModel> Search(string text)
+        {
+            var db = new LiteDatabase(@"c:\db\Biblioteca.db");
+            var books = db.GetCollection<BookModel>("books");
+
+            return books.Find(
+                    Query.Or(
+                        Query.Contains("Name", text), 
+                        Query.Contains("AuthorName", text)
+                    )
+                ).ToList();
+        }
     }
 }
