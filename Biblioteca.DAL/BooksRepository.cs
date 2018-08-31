@@ -1,11 +1,11 @@
-﻿using Biblioteca1.Models;
+﻿using Biblioteca.Models;
 using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Biblioteca1
+namespace Biblioteca.DAL
 {
     public class BooksRepository
     {
@@ -60,6 +60,14 @@ namespace Biblioteca1
                         Query.Contains("AuthorName", text)
                     )
                 ).ToList();
+        }
+
+        public BookModel GetById(int id)
+        {
+            var db = new LiteDatabase(@"c:\db\Biblioteca.db");
+            var books = db.GetCollection<BookModel>("books");
+
+            return books.FindById(id);
         }
     }
 }

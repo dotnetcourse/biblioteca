@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Biblioteca1.Models
+namespace Biblioteca.Models
 {
     public class BookModel
     {

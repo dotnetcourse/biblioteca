@@ -1,4 +1,5 @@
-﻿using Biblioteca1.Models;
+﻿using Biblioteca.DAL;
+using Biblioteca.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Biblioteca1.Controllers
+namespace Biblioteca.Controllers
 {
     public class BooksController : Controller
     {
@@ -19,7 +20,7 @@ namespace Biblioteca1.Controllers
 
             List<BookModel> myBooks = r.GetAll();
 
-            return View(myBooks);
+            return View();
         }
 
         [HttpGet]
@@ -105,6 +106,8 @@ namespace Biblioteca1.Controllers
                 //System.IO.File.AppendAllText("c:\\myfile.json", body);
                 //string myFileData = System.IO.File.ReadAllText("c:\\myfile.json");
 
+
+                //var myFileStream = System.IO.File.Open("c:\\myfile.json", FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read);
                 //var myFileStream = System.IO.File.OpenRead("c:\\myfile.json");
                 //StreamReader fileReader = new StreamReader(myFileStream);
                 //fileReader.ReadLine();
@@ -139,135 +142,13 @@ namespace Biblioteca1.Controllers
             return RedirectToAction("List");
         }
 
-        //public ActionResult Download()
-        //{
-        //    BooksRepository r = new BooksRepository();
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            BooksRepository r = new BooksRepository();
 
-        //    List<BookModel> bookList = r.GetAll();
-        //    string listString = "";
-        //    foreach (var book in bookList)
-        //    {
-        //        string row = $"{ book.Name},{book.AuthorName},{book.ISBN},{book.Year}\r\n";
-        //        listString = listString + row;
-        //    }
-
-        //    MemoryStream ms = new MemoryStream();
-        //    StreamWriter sw = new StreamWriter(ms);
-        //    sw.Write(listString);
-        //    sw.Flush();
-        //    ms.Position = 0;
-
-        //    return File(ms, "application/force-download", "exportbiblioteca.csv");
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //[HttpGet]
-        //public ActionResult Upload()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Upload(HttpPostedFileBase file)
-        //{
-
-        //    string uploadFolder = Server.MapPath("~/uploads/");
-        //    if (!Directory.Exists(uploadFolder))
-        //    {
-        //        Directory.CreateDirectory(uploadFolder);
-        //    }
-
-        //    BooksRepository r = new BooksRepository();
-
-        //    if (string.Compare(Path.GetExtension(file.FileName), ".csv", true) == 0)
-        //    {
-        //        StreamReader sr = new StreamReader(file.InputStream);
-        //        while (!sr.EndOfStream)
-        //        {
-        //            string line = sr.ReadLine();
-
-        //            System.IO.File.AppendAllText(Path.Combine(uploadFolder, file.FileName + ".arch"), line + "\r\n");
-
-        //            string[] fields = line.Split(',', ';' );
-        //            BookModel book = new BookModel
-        //            {
-        //                Name = fields[0].Trim('"'),
-        //                AuthorName = fields[1].Trim('"'),
-        //                ISBN = fields[2].Trim('"'),
-        //                Year = int.Parse(fields[3].Trim('"'))
-        //            };
-
-        //            r.Add(book);
-        //        }
-        //    }
-        //    else if (string.Compare(Path.GetExtension(file.FileName), ".json", true) == 0)
-        //    {
-        //        StreamReader sr = new StreamReader(file.InputStream);
-
-        //        string allText = sr.ReadToEnd();
-
-        //        System.IO.File.AppendAllText(Path.Combine(uploadFolder, file.FileName + ".arch"), allText);
-
-        //        var books = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<BookModel>>(allText);
-        //        foreach (var book in books)
-        //        {
-        //            //ne asiguram ca id-ul nu este suprascris
-        //            book.Id = 0;
-        //            r.Add(book);
-        //        }
-        //    }
-
-        //    return View();
-        //}
-
-        //public ActionResult DownloadAll()
-        //{
-        //    BooksRepository r = new BooksRepository();
-        //    List<BookModel> myBooks = r.GetAll();
-
-        //    string outputString = Newtonsoft.Json.JsonConvert.SerializeObject(myBooks);
-
-        //    MemoryStream stream = new MemoryStream();
-        //    StreamWriter sw = new StreamWriter(stream);
-        //    sw.Write(outputString);
-        //    sw.Flush();
-        //    stream.Position = 0;
-
-        //    return File(stream, "application/force-download", "allbooks.json");
-        //}
-
+            return View(r.GetById(id));
+        }
 
     }
 }
